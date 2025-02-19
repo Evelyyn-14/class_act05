@@ -15,6 +15,9 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   String petName = "Your Pet";
   int happinessLevel = 50;
   int hungerLevel = 50;
+  Color petColor = Colors.yellow;
+  String mood = "Neutral";
+  String moodEmoji = 'https://emojiisland.com/cdn/shop/products/Emoji_Icon_-_Smiling_medium.png?v=1571606089';
 
   // Function to increase happiness and update hunger when playing with the pet
   void _playWithPet() {
@@ -39,6 +42,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     } else {
       happinessLevel = (happinessLevel + 10).clamp(0, 100);
     }
+    _updateMood();
   }
 
   // Increase hunger level slightly when playing with the pet
@@ -48,6 +52,22 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
       hungerLevel = 100;
       happinessLevel = (happinessLevel - 20).clamp(0, 100);
     }
+    _updateMood();
+  }
+
+  void _updateMood() {
+    setState(() {
+      if (happinessLevel > 70) {
+        mood = "Happy";
+        petColor = Colors.green;
+      } else if (happinessLevel < 30) {
+        mood = "Unhappy";
+        petColor = Colors.red;
+      } else {
+        mood = "Neutral";
+        petColor = Colors.yellow;
+      }
+    });
   }
 
   @override
@@ -74,6 +94,15 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
               'Hunger Level: $hungerLevel',
               style: TextStyle(fontSize: 20.0),
             ),
+            SizedBox(height: 16.0),
+            Text(
+              'Mood: $mood',
+              style: TextStyle(fontSize: 20.0),
+            ),
+            SizedBox(height:8.0),
+            Padding(
+              padding: EdgeInsets.all(8.0), 
+              child: Image.network(moodEmoji, height: 30, width: 30)),
             SizedBox(height: 32.0),
             ElevatedButton(
               onPressed: _playWithPet,
