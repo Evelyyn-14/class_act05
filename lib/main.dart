@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,12 +17,14 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   String petName = "Your Pet";
   int happinessLevel = 50;
   int hungerLevel = 50;
+  int energyLevel = 50;
 
   // Function to increase happiness and update hunger when playing with the pet
   void _playWithPet() {
     setState(() {
       happinessLevel = (happinessLevel + 10).clamp(0, 100);
       _updateHunger();
+      _decreaseEnergy();
     });
   }
 
@@ -29,6 +33,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     setState(() {
       hungerLevel = (hungerLevel - 10).clamp(0, 100);
       _updateHappiness();
+      _increaseEnergy();
     });
   }
 
@@ -47,6 +52,27 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     if (hungerLevel > 100) {
       hungerLevel = 100;
       happinessLevel = (happinessLevel - 20).clamp(0, 100);
+    }
+  }
+
+  //Increase energy level slightly when feeding the pet
+  void _increaseEnergy(){
+    setState(() {
+      energyLevel = (energyLevel + 10).clamp(0, 100);
+    });
+  }
+
+  void _decreaseEnergy(){
+    setState(() {
+      energyLevel = (energyLevel - 10).clamp(0, 100);
+    });
+  }
+
+  void _updateEnergy(){
+    if (energyLevel < 30){
+      energyLevel = (energyLevel + 20).clamp(0, 100);
+    } else {
+      energyLevel = (energyLevel - 10).clamp(0, 100);
     }
   }
 
@@ -83,6 +109,17 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
             ElevatedButton(
               onPressed: _feedPet,
               child: Text('Feed Your Pet'),
+            ),
+            Text(
+              'Energy Level: $energyLevel',
+              style: TextStyle(fontSize: 20.0),
+            ),
+            SizedBox(height: 8.0),
+            LinearProgressIndicator(
+              value: energyLevel / 100,
+              minHeight: 10.0,
+              backgroundColor: Colors.grey,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
             ),
           ],
         ),
