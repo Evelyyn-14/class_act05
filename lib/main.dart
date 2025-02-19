@@ -132,7 +132,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
           children: <Widget>[
             Text(
               'Name: $petName',
-              style: TextStyle(fontSize: 20.0),
+              style: TextStyle(fontSize: 20.0, color: petColor),
             ),
             SizedBox(height: 16.0),
             Text(
