@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+TextEditingController text1 = TextEditingController();
 
 void main() {
   runApp(MaterialApp(
@@ -99,6 +100,12 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     }
   }
 
+  void _setName() {
+    setState(() {
+      petName = text1.text;
+    });
+  }
+
   //Increase energy level slightly when feeding the pet
   /*void _increaseEnergy(){
     setState(() {
@@ -130,6 +137,18 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            TextField(
+              obscureText: false,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Input Pet Name',
+              ),
+              controller: text1,
+            ),
+            ElevatedButton(
+              onPressed: _setName, 
+              child: Text("Confirm Name")
+            ),
             Text(
               'Name: $petName',
               style: TextStyle(fontSize: 20.0, color: petColor),
