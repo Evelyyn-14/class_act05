@@ -1,6 +1,6 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
+// Evelyn Escobedo and Myla Newby
 
 void main() {
   runApp(MaterialApp(
