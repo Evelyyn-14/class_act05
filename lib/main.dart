@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'dart:async';
+//EVELYN ESCOBEDO + MYLA NEWBY
 
 import 'package:flutter/material.dart';
 TextEditingController text1 = TextEditingController();
@@ -28,6 +29,11 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   String selectedActivity = 'Play';
   Timer? _winTimer;
   bool _hasWon = false;
+  void _setName() {
+    setState(() {
+      petName = text1.text;
+    });
+  }
 
   // Function to start the win timer
   void _startWinTimer() {
