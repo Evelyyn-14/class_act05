@@ -97,7 +97,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   }
 
   //Increase energy level slightly when feeding the pet
-  void _increaseEnergy(){
+  /*void _increaseEnergy(){
     setState(() {
       energyLevel = (energyLevel + 10).clamp(0, 100);
     });
@@ -115,7 +115,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     } else {
       energyLevel = (energyLevel - 10).clamp(0, 100);
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
