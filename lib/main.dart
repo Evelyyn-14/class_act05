@@ -1,8 +1,9 @@
 import 'dart:math';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 TextEditingController text1 = TextEditingController();
-
+Timer? timer1;
 void main() {
   runApp(MaterialApp(
     home: DigitalPetApp(),
@@ -12,7 +13,9 @@ void main() {
 class DigitalPetApp extends StatefulWidget {
   @override
   _DigitalPetAppState createState() => _DigitalPetAppState();
+  
 }
+
 
 class _DigitalPetAppState extends State<DigitalPetApp> {
   String petName = "Your Pet";
@@ -22,6 +25,19 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   Color petColor = Colors.yellow;
   String mood = "Neutral";
   String moodEmoji = 'https://emojiisland.com/cdn/shop/products/Emoji_Icon_-_Smiling_medium.png?v=1571606089';
+  Timer? timer1;
+
+  void _hungerTime () {
+    timer1 = Timer.periodic(const Duration(seconds: 30), (timer) {
+      // Check if the tick number is 5
+      if (hungerLevel != 0) {
+          //timer.cancel();
+          setState( () {
+            hungerLevel -= 10;
+          });          
+      }
+    });
+  }
 
   // Function to increase happiness and update hunger when playing with the pet
   void _playWithPet() {
@@ -76,6 +92,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
         petColor = Colors.yellow;
         moodEmoji = 'https://static-00.iconduck.com/assets.00/neutral-face-emoji-2048x1974-qdahu9yw.png';
       }
+      _hungerTime();
     });
   }
 
@@ -106,27 +123,6 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     });
   }
 
-  //Increase energy level slightly when feeding the pet
-  /*void _increaseEnergy(){
-    setState(() {
-      energyLevel = (energyLevel + 10).clamp(0, 100);
-    });
-  }
-
-  void _decreaseEnergy(){
-    setState(() {
-      energyLevel = (energyLevel - 10).clamp(0, 100);
-    });
-  }
-
-  void _updateEnergy(){
-    if (energyLevel < 30){
-      energyLevel = (energyLevel + 20).clamp(0, 100);
-    } else {
-      energyLevel = (energyLevel - 10).clamp(0, 100);
-    }
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,7 +143,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
             ),
             ElevatedButton(
               onPressed: _setName, 
-              child: Text("Confirm Name")
+              child: Text("Confirm Name"),
             ),
             Text(
               'Name: $petName',
@@ -184,6 +180,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
             ),
             Text(
               'Energy Level: $energyLevel',
+              
               style: TextStyle(fontSize: 20.0),
             ),
             SizedBox(height: 8.0),
