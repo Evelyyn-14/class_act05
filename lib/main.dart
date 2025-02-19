@@ -65,12 +65,15 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
       if (happinessLevel > 70) {
         mood = "Happy";
         petColor = Colors.green;
+        moodEmoji = 'https://emojiisland.com/cdn/shop/products/Emoji_Icon_-_Smiling_medium.png?v=1571606089';
       } else if (happinessLevel < 30) {
         mood = "Unhappy";
         petColor = Colors.red;
+        moodEmoji = 'https://static.vecteezy.com/system/resources/previews/038/512/164/non_2x/a-3d-sad-face-emoji-2-on-a-transparent-background-free-png.png';
       } else {
         mood = "Neutral";
         petColor = Colors.yellow;
+        moodEmoji = 'https://static-00.iconduck.com/assets.00/neutral-face-emoji-2048x1974-qdahu9yw.png';
       }
     });
   }
